@@ -79,7 +79,7 @@ windower.register_event('addon command', function(...)
 		if itemsHeldElementCount == 0 then
 			debug("Failed to construct table of items to be traded.  Insure that you have the specified item in your inventory.")
 		else
-			local tradeNPCPacket = constructNPCTradePacket(tradeAlias, itemsHeld, args[1])
+			local tradeNPCPacket = constructNPCTradePacketKey(tradeAlias, itemsHeld, args[1])
 			
 			packets.inject(tradeNPCPacket)
 			resetGlobals()
@@ -168,7 +168,7 @@ function constructNPCTradePacket(targetInfo, itemsHeld)
 end
 
 -- Used with using pre-populated table of trade aliases --
-function constructNPCTradePacket(tradeAlias, itemsHeld, key)
+function constructNPCTradePacketKey(tradeAlias, itemsHeld, key)
 	tradePacket = packets.new('outgoing', 0x036, 
 	{
 		['Target'] = tradeAlias[key].targetID,
